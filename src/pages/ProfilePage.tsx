@@ -7,6 +7,7 @@ import { Button } from '../components/ui/button'
 import { Card, CardContent, CardHeader } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
+import { TrustScore } from '../components/profile/TrustScore'
 
 interface ProfilePageProps {
   user: User
@@ -25,11 +26,18 @@ export function ProfilePage({ user }: ProfilePageProps) {
     bio: 'Passionate UI/UX designer with 5+ years of experience creating beautiful and functional digital experiences. I love turning complex problems into simple, elegant solutions.',
     skills: ['UI/UX Design', 'Figma', 'Prototyping', 'User Research', 'Design Systems'],
     location: 'San Francisco, CA',
-    hourlyRate: 85,
     rating: 4.9,
     completedProjects: 47,
-    isFreelancer: true,
-    isClient: false,
+    userType: 'jobseeker',
+    jobTitle: 'Senior UI/UX Designer',
+    connections: 456,
+    endorsements: 89,
+    trustScore: 88,
+    totalVotes: 67,
+    upvotes: 59,
+    downvotes: 8,
+    isOnline: true,
+    country: 'United States',
     createdAt: '2020-01-15T00:00:00Z',
     updatedAt: '2024-01-15T00:00:00Z'
   }
@@ -162,12 +170,12 @@ export function ProfilePage({ user }: ProfilePageProps) {
                   <p className="text-xs text-muted-foreground">Projects</p>
                 </div>
                 <div>
-                  <p className="font-bold">${profileUser.hourlyRate}/hr</p>
-                  <p className="text-xs text-muted-foreground">Hourly Rate</p>
+                  <p className="font-bold">{profileUser.connections}</p>
+                  <p className="text-xs text-muted-foreground">Connections</p>
                 </div>
                 <div>
-                  <p className="font-bold">1.2k</p>
-                  <p className="text-xs text-muted-foreground">Followers</p>
+                  <p className="font-bold">{profileUser.trustScore}</p>
+                  <p className="text-xs text-muted-foreground">Trust Score</p>
                 </div>
               </div>
             </div>
@@ -186,6 +194,17 @@ export function ProfilePage({ user }: ProfilePageProps) {
           </div>
         </CardContent>
       </Card>
+
+      {/* Trust Score Section */}
+      {!isOwnProfile && (
+        <div className="mb-6">
+          <TrustScore 
+            userId={profileUser.id} 
+            currentUserId={user.id}
+            showVoting={true}
+          />
+        </div>
+      )}
 
       {/* Content Tabs */}
       <Tabs defaultValue="portfolio" className="space-y-6">

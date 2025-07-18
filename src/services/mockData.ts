@@ -1,4 +1,4 @@
-import { User, Job, Post, UserType } from '../types'
+import { User, Job, Post, UserType, TrustVote, ProjectOffer, WorkHistory } from '../types'
 
 export const mockUsers: User[] = [
   {
@@ -10,13 +10,16 @@ export const mockUsers: User[] = [
     skills: ['Video Editing', 'Motion Graphics', 'Adobe Premiere Pro', 'After Effects', 'Social Media Content'],
     location: 'San Francisco, CA',
     country: 'United States',
-    hourlyRate: 75,
     rating: 4.9,
     completedProjects: 127,
     userType: 'jobseeker' as UserType,
     jobTitle: 'Senior Video Editor',
     connections: 342,
     endorsements: 89,
+    trustScore: 92,
+    totalVotes: 89,
+    upvotes: 82,
+    downvotes: 7,
     isOnline: true,
     createdAt: '2023-01-15T00:00:00Z',
     updatedAt: '2024-01-15T00:00:00Z'
@@ -30,13 +33,16 @@ export const mockUsers: User[] = [
     skills: ['Web Development', 'React', 'Node.js', 'AWS', 'TypeScript', 'Database Management'],
     location: 'Austin, TX',
     country: 'United States',
-    hourlyRate: 95,
     rating: 4.8,
     completedProjects: 89,
     userType: 'jobseeker' as UserType,
     jobTitle: 'Full Stack Developer',
     connections: 567,
     endorsements: 134,
+    trustScore: 88,
+    totalVotes: 76,
+    upvotes: 67,
+    downvotes: 9,
     isOnline: false,
     createdAt: '2023-02-20T00:00:00Z',
     updatedAt: '2024-01-20T00:00:00Z'
@@ -50,13 +56,16 @@ export const mockUsers: User[] = [
     skills: ['Digital Marketing', 'Content Writing', 'Social Media Management', 'SEO', 'Google Analytics'],
     location: 'Miami, FL',
     country: 'United States',
-    hourlyRate: 65,
     rating: 4.7,
     completedProjects: 156,
     userType: 'jobseeker' as UserType,
     jobTitle: 'Digital Marketing Manager',
     connections: 789,
     endorsements: 203,
+    trustScore: 85,
+    totalVotes: 134,
+    upvotes: 114,
+    downvotes: 20,
     isOnline: true,
     createdAt: '2023-03-10T00:00:00Z',
     updatedAt: '2024-01-10T00:00:00Z'
@@ -78,6 +87,10 @@ export const mockUsers: User[] = [
     jobTitle: 'CEO & Founder',
     connections: 1234,
     endorsements: 456,
+    trustScore: 95,
+    totalVotes: 45,
+    upvotes: 43,
+    downvotes: 2,
     isOnline: true,
     createdAt: '2023-01-01T00:00:00Z',
     updatedAt: '2024-01-01T00:00:00Z'
@@ -91,13 +104,16 @@ export const mockUsers: User[] = [
     skills: ['UI/UX Design', 'Figma', 'Adobe Creative Suite', 'Prototyping', 'User Research'],
     location: 'London',
     country: 'United Kingdom',
-    hourlyRate: 80,
     rating: 4.8,
     completedProjects: 94,
     userType: 'both' as UserType,
     jobTitle: 'Senior UX Designer',
     connections: 445,
     endorsements: 112,
+    trustScore: 90,
+    totalVotes: 67,
+    upvotes: 60,
+    downvotes: 7,
     isOnline: true,
     createdAt: '2023-04-05T00:00:00Z',
     updatedAt: '2024-01-05T00:00:00Z'
@@ -240,9 +256,109 @@ export const mockPosts: Post[] = [
   }
 ]
 
+export const mockTrustVotes: TrustVote[] = [
+  {
+    id: '1',
+    voterId: '4',
+    targetUserId: '1',
+    projectId: 'proj_1',
+    voteType: 'upvote',
+    comment: 'Excellent work on the video editing project. Professional and delivered on time.',
+    createdAt: '2024-01-16T00:00:00Z'
+  },
+  {
+    id: '2',
+    voterId: '5',
+    targetUserId: '2',
+    projectId: 'proj_2',
+    voteType: 'upvote',
+    comment: 'Great developer, clean code and good communication.',
+    createdAt: '2024-01-14T00:00:00Z'
+  }
+]
+
+export const mockProjectOffers: ProjectOffer[] = [
+  {
+    id: '1',
+    jobId: '1',
+    freelancerId: '1',
+    employerId: '4',
+    proposedRate: 80,
+    message: 'I would love to work on this video editing project. I have extensive experience with similar campaigns and can deliver high-quality results.',
+    timeline: '1 week',
+    status: 'pending',
+    createdAt: '2024-01-17T00:00:00Z',
+    updatedAt: '2024-01-17T00:00:00Z'
+  },
+  {
+    id: '2',
+    jobId: '2',
+    freelancerId: '2',
+    employerId: '4',
+    proposedRate: 100,
+    message: 'I am interested in this full-stack position. My experience with React and Node.js makes me a perfect fit.',
+    timeline: 'Immediate start',
+    status: 'countered',
+    counterOffer: {
+      rate: 95,
+      message: 'We like your profile! Would you consider $95/hour?',
+      createdAt: '2024-01-16T00:00:00Z'
+    },
+    createdAt: '2024-01-15T00:00:00Z',
+    updatedAt: '2024-01-16T00:00:00Z'
+  }
+]
+
+export const mockWorkHistory: WorkHistory[] = [
+  {
+    id: '1',
+    jobId: 'job_completed_1',
+    freelancerId: '1',
+    employerId: '4',
+    status: 'completed',
+    finalRate: 75,
+    completedAt: '2024-01-10T00:00:00Z',
+    canVote: false, // Already voted
+    createdAt: '2023-12-15T00:00:00Z'
+  },
+  {
+    id: '2',
+    jobId: 'job_completed_2',
+    freelancerId: '2',
+    employerId: '5',
+    status: 'completed',
+    finalRate: 90,
+    completedAt: '2024-01-12T00:00:00Z',
+    canVote: true, // Can still vote
+    createdAt: '2023-12-20T00:00:00Z'
+  }
+]
+
 // Helper functions
 export const getUserById = (userId: string): User | undefined => {
   return mockUsers.find(user => user.id === userId)
+}
+
+export const getTrustScore = (userId: string): { score: number; upvotes: number; downvotes: number; total: number } => {
+  const user = getUserById(userId)
+  if (!user) return { score: 0, upvotes: 0, downvotes: 0, total: 0 }
+  
+  return {
+    score: user.trustScore,
+    upvotes: user.upvotes,
+    downvotes: user.downvotes,
+    total: user.totalVotes
+  }
+}
+
+export const canVoteForUser = (voterId: string, targetUserId: string): boolean => {
+  // Check if they have worked together and voting is allowed
+  return mockWorkHistory.some(work => 
+    ((work.freelancerId === voterId && work.employerId === targetUserId) ||
+     (work.employerId === voterId && work.freelancerId === targetUserId)) &&
+    work.status === 'completed' &&
+    work.canVote
+  )
 }
 
 export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))

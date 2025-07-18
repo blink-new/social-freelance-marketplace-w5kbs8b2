@@ -9,7 +9,6 @@ export interface User {
   skills: string[];
   location: string;
   country: string;
-  hourlyRate?: number;
   salary?: string;
   rating: number;
   completedProjects: number;
@@ -18,6 +17,10 @@ export interface User {
   jobTitle: string;
   connections: number;
   endorsements: number;
+  trustScore: number; // 0-100 based on upvotes/downvotes
+  totalVotes: number;
+  upvotes: number;
+  downvotes: number;
   isOnline: boolean;
   createdAt: string;
   updatedAt: string;
@@ -94,6 +97,49 @@ export interface Match {
   jobId: string;
   score: number;
   reasons: string[];
+  createdAt: string;
+}
+
+export interface TrustVote {
+  id: string;
+  voterId: string;
+  targetUserId: string;
+  projectId: string; // Only after working together
+  voteType: 'upvote' | 'downvote';
+  comment?: string;
+  createdAt: string;
+}
+
+export interface ProjectOffer {
+  id: string;
+  jobId: string;
+  freelancerId: string;
+  employerId: string;
+  proposedRate?: number;
+  proposedBudget?: number;
+  message: string;
+  timeline?: string;
+  status: 'pending' | 'accepted' | 'rejected' | 'countered';
+  counterOffer?: {
+    rate?: number;
+    budget?: number;
+    message: string;
+    createdAt: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WorkHistory {
+  id: string;
+  jobId: string;
+  freelancerId: string;
+  employerId: string;
+  status: 'completed' | 'in_progress' | 'cancelled';
+  finalRate?: number;
+  finalBudget?: number;
+  completedAt?: string;
+  canVote: boolean; // True if project is completed and user hasn't voted yet
   createdAt: string;
 }
 

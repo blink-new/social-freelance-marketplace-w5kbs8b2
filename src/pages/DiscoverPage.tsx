@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Filter, MapPin, Star, Clock } from 'lucide-react'
+import { Search, Filter, MapPin, Star, Clock, Shield } from 'lucide-react'
 import { User } from '../types'
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar'
 import { Button } from '../components/ui/button'
@@ -7,6 +7,8 @@ import { Card, CardContent, CardHeader } from '../components/ui/card'
 import { Input } from '../components/ui/input'
 import { Badge } from '../components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
+import { OfferDialog } from '../components/jobs/OfferDialog'
+import { mockJobs } from '../services/mockData'
 
 interface DiscoverPageProps {
   user: User
@@ -25,7 +27,7 @@ export function DiscoverPage({ user }: DiscoverPageProps) {
       avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
       location: 'San Francisco, CA',
       rating: 4.9,
-      hourlyRate: 85,
+      trustScore: 88,
       skills: ['Figma', 'Prototyping', 'User Research'],
       completedProjects: 47,
       responseTime: '2 hours'
@@ -37,7 +39,7 @@ export function DiscoverPage({ user }: DiscoverPageProps) {
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       location: 'New York, NY',
       rating: 4.8,
-      hourlyRate: 95,
+      trustScore: 92,
       skills: ['React', 'Node.js', 'TypeScript'],
       completedProjects: 32,
       responseTime: '1 hour'
@@ -49,7 +51,7 @@ export function DiscoverPage({ user }: DiscoverPageProps) {
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
       location: 'Austin, TX',
       rating: 4.7,
-      hourlyRate: 45,
+      trustScore: 85,
       skills: ['Copywriting', 'SEO', 'Content Strategy'],
       completedProjects: 89,
       responseTime: '30 minutes'
