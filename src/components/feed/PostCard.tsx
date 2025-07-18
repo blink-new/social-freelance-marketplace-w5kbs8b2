@@ -6,6 +6,7 @@ import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { Badge } from '../ui/badge'
 import { formatDistanceToNow } from 'date-fns'
+import { getUserById } from '../../services/mockData'
 
 interface PostCardProps {
   post: Post
@@ -17,13 +18,13 @@ export function PostCard({ post, currentUser }: PostCardProps) {
   const [saved, setSaved] = useState(false)
   const [showComments, setShowComments] = useState(false)
 
-  // Mock user data - in real app, this would come from the database
-  const postUser = {
+  // Get user data from mock service
+  const postUser = getUserById(post.userId) || {
     id: post.userId,
-    displayName: 'Sarah Chen',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-    isFreelancer: true,
-    skills: ['UI/UX Design', 'Figma', 'Prototyping']
+    displayName: 'Unknown User',
+    avatar: '',
+    isFreelancer: false,
+    skills: []
   }
 
   const handleLike = () => {
@@ -69,7 +70,7 @@ export function PostCard({ post, currentUser }: PostCardProps) {
           <p className="text-sm leading-relaxed">{post.content}</p>
           
           {/* Skills Tags */}
-          {postUser.skills && (
+          {postUser.skills && postUser.skills.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
               {postUser.skills.map((skill) => (
                 <Badge key={skill} variant="outline" className="text-xs">

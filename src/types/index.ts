@@ -1,69 +1,184 @@
+export type UserType = 'jobseeker' | 'employer' | 'both';
+
 export interface User {
-  id: string
-  email: string
-  displayName?: string
-  avatar?: string
-  bio?: string
-  skills?: string[]
-  location?: string
-  hourlyRate?: number
-  rating?: number
-  completedProjects?: number
-  isFreelancer?: boolean
-  isClient?: boolean
-  createdAt: string
-  updatedAt: string
+  id: string;
+  email: string;
+  displayName: string;
+  avatar?: string;
+  bio?: string;
+  skills: string[];
+  location: string;
+  country: string;
+  hourlyRate?: number;
+  salary?: string;
+  rating: number;
+  completedProjects: number;
+  userType: UserType;
+  company?: string;
+  jobTitle: string;
+  connections: number;
+  endorsements: number;
+  isOnline: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface Project {
-  id: string
-  title: string
-  description: string
-  budget: number
-  deadline: string
-  skills: string[]
-  clientId: string
-  freelancerId?: string
-  status: 'open' | 'in_progress' | 'completed' | 'cancelled'
-  images?: string[]
-  createdAt: string
-  updatedAt: string
+export interface Job {
+  id: string;
+  title: string;
+  description: string;
+  budget?: number;
+  salary?: string;
+  deadline?: string;
+  skills: string[];
+  employerId: string;
+  status: 'open' | 'in_progress' | 'closed';
+  applications: number;
+  postedDate: string;
+  location: string;
+  country: string;
+  jobType: 'full-time' | 'part-time' | 'contract' | 'freelance';
+  experienceLevel: 'entry' | 'mid' | 'senior' | 'executive';
+  targetDemographics?: {
+    countries: string[];
+    ageRange?: string;
+    experience?: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Post {
-  id: string
-  userId: string
-  content: string
-  images?: string[]
-  projectId?: string
-  likes: number
-  comments: number
-  shares: number
-  createdAt: string
-  updatedAt: string
+  id: string;
+  userId: string;
+  content: string;
+  images?: string[];
+  jobId?: string;
+  likes: number;
+  comments: number;
+  shares: number;
+  postType: 'achievement' | 'job_posting' | 'article' | 'update';
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Message {
-  id: string
-  senderId: string
-  receiverId: string
-  content: string
-  projectId?: string
-  createdAt: string
-  isRead: boolean
+  id: string;
+  senderId: string;
+  receiverId: string;
+  content: string;
+  jobId?: string;
+  createdAt: string;
+  isRead: boolean;
 }
 
-export interface Skill {
-  id: string
-  name: string
-  category: string
+export interface Connection {
+  id: string;
+  userId: string;
+  connectedUserId: string;
+  status: 'pending' | 'accepted' | 'declined';
+  createdAt: string;
+}
+
+export interface Endorsement {
+  id: string;
+  endorserId: string;
+  endorsedUserId: string;
+  skill: string;
+  createdAt: string;
 }
 
 export interface Match {
-  id: string
-  freelancerId: string
-  projectId: string
-  score: number
-  reasons: string[]
-  createdAt: string
+  id: string;
+  candidateId: string;
+  jobId: string;
+  score: number;
+  reasons: string[];
+  createdAt: string;
 }
+
+export const SKILL_CATEGORIES = {
+  creative: [
+    'Video Editing',
+    'Graphic Design',
+    'Photography',
+    'Animation',
+    'UI/UX Design',
+    'Content Writing',
+    'Copywriting',
+    'Social Media Management',
+    'Brand Design',
+    'Illustration',
+    'Video Production',
+    'Audio Editing',
+    'Motion Graphics'
+  ],
+  technical: [
+    'Web Development',
+    'Mobile Development',
+    'Data Science',
+    'Machine Learning',
+    'DevOps',
+    'Cybersecurity',
+    'Database Management',
+    'Cloud Computing',
+    'Software Testing',
+    'System Administration',
+    'AI/ML Engineering',
+    'Blockchain Development'
+  ],
+  business: [
+    'Project Management',
+    'Digital Marketing',
+    'Sales',
+    'Business Analysis',
+    'Consulting',
+    'Financial Planning',
+    'HR Management',
+    'Operations',
+    'Strategy',
+    'Customer Service',
+    'Product Management',
+    'Business Development'
+  ],
+  other: [
+    'Translation',
+    'Virtual Assistant',
+    'Data Entry',
+    'Research',
+    'Teaching',
+    'Legal Services',
+    'Accounting',
+    'Event Planning',
+    'Healthcare',
+    'Real Estate'
+  ]
+};
+
+export const COUNTRIES = [
+  'United States',
+  'United Kingdom',
+  'Canada',
+  'Australia',
+  'Germany',
+  'France',
+  'Netherlands',
+  'Sweden',
+  'India',
+  'Singapore',
+  'Japan',
+  'Brazil',
+  'Mexico',
+  'Spain',
+  'Italy',
+  'Poland',
+  'Ukraine',
+  'Philippines',
+  'Pakistan',
+  'Bangladesh',
+  'South Africa',
+  'Nigeria',
+  'Kenya',
+  'Argentina',
+  'Chile'
+];

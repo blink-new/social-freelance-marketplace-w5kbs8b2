@@ -10,6 +10,7 @@ import { LoadingScreen } from './components/ui/LoadingScreen'
 // Pages
 import { HomePage } from './pages/HomePage'
 import { DiscoverPage } from './pages/DiscoverPage'
+import { JobsPage } from './pages/JobsPage'
 import { MessagesPage } from './pages/MessagesPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { ProjectDetailsPage } from './pages/ProjectDetailsPage'
@@ -34,8 +35,8 @@ function App() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-primary">FreelanceConnect</h1>
-          <p className="text-muted-foreground">Please sign in to continue</p>
+          <h1 className="text-4xl font-bold text-primary">MeetOut</h1>
+          <p className="text-muted-foreground">Connect. Collaborate. Succeed.</p>
           <button 
             onClick={() => blink.auth.login()}
             className="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
@@ -54,8 +55,10 @@ function App() {
         <main className="pb-16 md:pb-0">
           <Routes>
             <Route path="/" element={<HomePage user={user} />} />
-            <Route path="/discover" element={<DiscoverPage user={user} />} />
+            <Route path="/network" element={<DiscoverPage user={user} />} />
+            <Route path="/jobs" element={<JobsPage />} />
             <Route path="/messages" element={<MessagesPage user={user} />} />
+            <Route path="/notifications" element={<div className="p-8 text-center">Notifications coming soon!</div>} />
             <Route path="/profile/:userId?" element={<ProfilePage user={user} />} />
             <Route path="/project/:projectId" element={<ProjectDetailsPage user={user} />} />
           </Routes>
